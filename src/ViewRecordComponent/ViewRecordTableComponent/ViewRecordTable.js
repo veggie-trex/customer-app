@@ -8,7 +8,7 @@ const table = (props) => {
           <Table  dark>
           <thead>
                 <tr>
-                  <th>#</th>
+                  <th scope="row">#</th>
                   <th>First Name</th>
                   <th>Last Name</th>
                   <th>Username</th>
@@ -18,7 +18,7 @@ const table = (props) => {
               {props.arrayrecords.map((data, index)=>{
                 return(
                 <tr>
-                  <td scope="row">1</td>
+                  <td>1</td>
                   <td>{data.title}</td>
                   <td>Otto</td>
                   <td>@mdo</td>
