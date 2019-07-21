@@ -15,11 +15,13 @@ class Record extends Component {
         super(props);
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.setRecipient = this.setRecipient.bind(this);
 
     }
     state = {
         modalIsOpen: false,
         data: {},
+        recipient: ''
     };
 
     openModal(data) {
@@ -36,9 +38,14 @@ class Record extends Component {
     }
 
     shareAllRecordersHandler = () => {
-
-        axios.post("", this.props.arrayrecords).then((reponse) => {
+        axios.post(`${process.env.VEGGIE_T_REX_API}share/${this.state.recipient}`, this.props.arrayrecords).then((reponse) => {
             console.log(reponse);
+        })
+    }
+
+    setRecipient = (event) => {
+        this.setState({
+            recipient: event.target.value
         })
     }
 
@@ -88,7 +95,7 @@ class Record extends Component {
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
                     style={customStyles}>
-                    <Patient clicked={this.closeModal} info={this.state.data} closedModal={this.closeModal} />
+                    <Patient clicked={this.closeModal} info={this.state.data} setRecipient={this.setRecipient} closedModal={this.closeModal} />
                 </Modal>
             </div>
         );
