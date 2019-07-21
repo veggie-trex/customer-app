@@ -8,11 +8,6 @@ import './Patient.css';
 
 
 class Patient extends Component {
-
-
-    shareTheData = () => {
-        this.props.closedModal();
-    };
     render() {
         return (
             <Card>
@@ -33,7 +28,7 @@ class Patient extends Component {
                             <input className='form-control' type="text" name="recipient" onChange={this.props.setRecipient} />
                         </label>
                     </div>
-                    <Button onClick={this.props.clicked}>close</Button>  <Button color="primary" onClick={this.shareTheData}>Share</Button>
+                    <Button onClick={this.props.closeModal}>close</Button>  <Button color="primary" onClick={this.props.onClick}>Share</Button>
                 </CardBody>
             </Card>
 

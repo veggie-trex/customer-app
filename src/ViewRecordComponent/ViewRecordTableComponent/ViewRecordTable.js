@@ -16,8 +16,9 @@ class Record extends Component {
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.setRecipient = this.setRecipient.bind(this);
-
+        this.shareRecord = this.shareRecord.bind(this);
     }
+
     state = {
         modalIsOpen: false,
         data: {},
@@ -37,10 +38,17 @@ class Record extends Component {
         this.setState({ modalIsOpen: false });
     }
 
-    shareAllRecordersHandler = () => {
+    shareAllRecords = () => {
         axios.post(`${process.env.VEGGIE_T_REX_API}share/${this.state.recipient}`, this.props.arrayrecords).then((reponse) => {
             console.log(reponse);
-        })
+        });
+    }
+
+    shareRecord = () => {
+        axios.post(`${process.env.VEGGIE_T_REX_API}share/${this.state.recipient}`, this.props.arrayrecords[0]).then((reponse) => {
+            console.log(reponse);
+        });
+        this.setState({ modalIsOpen: false });
     }
 
     setRecipient = (event) => {
@@ -63,7 +71,7 @@ class Record extends Component {
 
         return (
             <div>
-                <Button color="primary" size="lg" onClick={this.shareAllRecordersHandler}>Share All Records</Button>
+                <Button color="primary" size="lg" onClick={this.shareAllRecords}>Share All Records</Button>
                 <br />
 
                 <Table dark>
@@ -95,7 +103,7 @@ class Record extends Component {
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
                     style={customStyles}>
-                    <Patient clicked={this.closeModal} info={this.state.data} setRecipient={this.setRecipient} closedModal={this.closeModal} />
+                    <Patient onClick={this.shareRecord} info={this.state.data} setRecipient={this.setRecipient} closeModal={this.closeModal} />
                 </Modal>
             </div>
         );
