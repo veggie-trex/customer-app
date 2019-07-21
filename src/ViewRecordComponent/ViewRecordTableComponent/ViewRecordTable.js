@@ -45,7 +45,7 @@ class Record extends Component {
     }
 
     shareRecord = () => {
-        axios.post(`${process.env.VEGGIE_T_REX_API}share/${this.state.recipient}`, this.props.arrayrecords[0]).then((reponse) => {
+        axios.post(`${process.env.VEGGIE_T_REX_API}share/${this.state.recipient}`, this.state.data).then((reponse) => {
             console.log(reponse);
         });
         this.setState({ modalIsOpen: false });
