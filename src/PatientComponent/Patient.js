@@ -9,7 +9,6 @@ class Patient extends Component {
 
 
     shareTheData = () => {
-        console.log("Share the info")
         this.props.closedModal();
     };
     render() {

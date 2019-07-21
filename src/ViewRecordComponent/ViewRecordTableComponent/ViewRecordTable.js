@@ -12,7 +12,7 @@ class Record extends Component {
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
-        
+
     }
     state = {
         modalIsOpen: false,
@@ -38,14 +38,13 @@ class Record extends Component {
 
 
     shareAllRecordersHandler = () => {
-        console.log("Share all is working");
 
-        axios.post("", this.props.arrayrecords).then((reponse)=>{
+        axios.post("", this.props.arrayrecords).then((reponse) => {
             console.log(reponse);
         })
-        
-        
-        
+
+
+
     }
 
 
@@ -67,40 +66,40 @@ class Record extends Component {
             <div>
                 <br />
                 <Button color="primary" size="lg" onClick={this.shareAllRecordersHandler}>Share All Records</Button>
-                    <Table dark>
-                        <thead>
-                            <tr>
-                                <th scope="row">#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.props.arrayrecords.map((data, index) => {
+                <Table dark>
+                    <thead>
+                        <tr>
+                            <th scope="row">#</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Username</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.props.arrayrecords.map((data, index) => {
 
-                                return (
+                            return (
 
-                                    <tr key={data.id}>
-                                        <td>{data.id}</td>
-                                        <td>{data.title}</td>
-                                        <td>{data.body}</td>
-                                        <td><ShareButton cliked={this.openModal.bind(this, data)}>Share Info</ShareButton></td>
-                                    </tr>
+                                <tr key={data.id}>
+                                    <td>{data.id}</td>
+                                    <td>{data.title}</td>
+                                    <td>{data.body}</td>
+                                    <td><ShareButton cliked={this.openModal.bind(this, data)}>Share Info</ShareButton></td>
+                                </tr>
 
-                                )
-                            })}
-                        </tbody>
-                    </Table>
-                    <Modal
-                        isOpen={this.state.modalIsOpen}
-                        onAfterOpen={this.afterOpenModal}
-                        onRequestClose={this.closeModal}
-                        style={customStyles}>
-                        <Patient clicked={this.closeModal} info={this.state.data} closedModal={this.closeModal} />
-                    </Modal>
-                </div>
-                );
-            }
-        }
+                            )
+                        })}
+                    </tbody>
+                </Table>
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onAfterOpen={this.afterOpenModal}
+                    onRequestClose={this.closeModal}
+                    style={customStyles}>
+                    <Patient clicked={this.closeModal} info={this.state.data} closedModal={this.closeModal} />
+                </Modal>
+            </div>
+        );
+    }
+}
 export default Record
