@@ -17,30 +17,36 @@ class Record extends Component {
         this.closeModal = this.closeModal.bind(this);
         this.setRecipient = this.setRecipient.bind(this);
         this.shareRecord = this.shareRecord.bind(this);
+        this.displayRecipient = this.displayRecipient.bind(this);
     }
 
     state = {
         modalIsOpen: false,
         data: {},
-        recipient: ''
+        recipient: '',
+        recipientInputVisible: false
     };
 
     openModal(data) {
         var obj = { ...this.state.data };
         obj = data;
-        this.setState({ 
+        this.setState({
             modalIsOpen: true,
             data: obj
-         });
+        });
     }
 
-    closeModal() {
-        this.setState({ modalIsOpen: false });
-    }
+    closeModal = () => this.setState({ modalIsOpen: false });
+
+    displayRecipient = () => this.setState({ recipientInputVisible: true });
 
     shareAllRecords = () => {
         axios.post(`${process.env.VEGGIE_T_REX_API}share/${this.state.recipient}`, this.props.arrayrecords).then((reponse) => {
             console.log(reponse);
+        });
+        this.setState({
+            recipient: '',
+            recipientInputVisible: false
         });
     }
 
@@ -48,7 +54,10 @@ class Record extends Component {
         axios.post(`${process.env.VEGGIE_T_REX_API}share/${this.state.recipient}`, this.state.data).then((reponse) => {
             console.log(reponse);
         });
-        this.setState({ modalIsOpen: false });
+        this.setState({
+            modalIsOpen: false,
+            recipient: ''
+        });
     }
 
     setRecipient = (event) => {
@@ -71,8 +80,11 @@ class Record extends Component {
 
         return (
             <div>
-                <Button color="primary" size="lg" onClick={this.shareAllRecords}>Share All Records</Button>
-                <br />
+                <div className="header">
+                    <h1>Vaccine Administration Record</h1>
+                    <p>Patient Name: John Smith</p>
+                    <p>Date of Birth: 5/31/1967</p>
+                </div>
 
                 <Table dark>
                     <thead>
@@ -98,6 +110,20 @@ class Record extends Component {
                         })}
                     </tbody>
                 </Table>
+
+                <br />
+                <Button className="btn-secondary" onClick={this.displayRecipient}>Share All Records</Button>
+
+                {this.state.recipientInputVisible &&
+                    <div className='form-group'>
+                        <label>
+                            Recipient address
+                            <input className='form-control' type="text" name="recipient" onChange={this.setRecipient} />
+                        </label>
+                        <button className="btn-primary" onClick={this.shareAllRecords}>Share</button>
+                    </div>
+                }
+
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
