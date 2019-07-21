@@ -10,7 +10,7 @@ class ViewRecord extends Component {
         axios.get("https://jsonplaceholder.typicode.com/posts")
         .then(response => {
                 this.setState({data: response.data})
-                //console.log(response);
+                //sconsole.log(response);
 
             })
     }
