@@ -10,6 +10,12 @@ class ViewRecord extends Component {
     componentDidMount() {
         axios.get(`${process.env.VEGGIE_T_REX_API}patients/${this.state.patientId}/records`)
             .then(response => {
+                response.data.map(r => {
+                    r.immunizationDate = new Date(r.immunizationDate).toLocaleDateString();
+                    r.nextImmunizationDate = new Date(r.nextImmunizationDate).toLocaleDateString();
+                    return r;
+
+                })
                 this.setState({ data: response.data })
             });
     }

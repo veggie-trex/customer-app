@@ -14,7 +14,6 @@ class Record extends Component {
     constructor(props) {
         super(props);
         this.openModal = this.openModal.bind(this);
-        this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
 
     }
@@ -22,8 +21,6 @@ class Record extends Component {
         modalIsOpen: false,
         data: {},
     };
-
-
 
     openModal(data) {
         var obj = { ...this.state.data };
@@ -34,25 +31,16 @@ class Record extends Component {
          });
     }
 
-    afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        //this.subtitle.style.color = '#f00';
-    }
     closeModal() {
         this.setState({ modalIsOpen: false });
     }
-
 
     shareAllRecordersHandler = () => {
 
         axios.post("", this.props.arrayrecords).then((reponse) => {
             console.log(reponse);
         })
-
-
-
     }
-
 
     render() {
         const customStyles = {
@@ -75,18 +63,20 @@ class Record extends Component {
                     <thead>
                         <tr>
                             <th scope="row">#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
+                            <th>Doctor ID</th>
+                            <th>Immunization Type</th>
+                            <th>Date</th>
+                            <th>Next Immunization</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.arrayrecords.map((data, index) => {
                             return (
                                 <tr key={index}>
-                                    <td>{data.id}</td>
-                                    <td>{data.title}</td>
-                                    <td>{data.body}</td>
+                                    <td>{data.doctorId}</td>
+                                    <td>{data.immunizationType}</td>
+                                    <td>{data.immunizationDate}</td>
+                                    <td>{data.nextImmunizationDate}</td>
                                     <td><ShareButton cliked={this.openModal.bind(this, data)}>Share Info</ShareButton></td>
                                 </tr>
                             )
