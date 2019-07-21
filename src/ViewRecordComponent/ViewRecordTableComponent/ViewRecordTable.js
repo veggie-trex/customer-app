@@ -112,7 +112,7 @@ class Record extends Component {
                 </Table>
 
                 <br />
-                <Button className="btn-secondary" onClick={this.displayRecipient}>Share All Records</Button>
+                <Button className="btn btn-secondary" onClick={this.displayRecipient}>Share All Records</Button>
 
                 {this.state.recipientInputVisible &&
                     <div className='form-group'>
@@ -120,7 +120,7 @@ class Record extends Component {
                             Recipient address
                             <input className='form-control' type="text" name="recipient" onChange={this.setRecipient} />
                         </label>
-                        <button className="btn-primary" onClick={this.shareAllRecords}>Share</button>
+                        <button className="btn btn-primary" onClick={this.shareAllRecords}>Share</button>
                     </div>
                 }
 
