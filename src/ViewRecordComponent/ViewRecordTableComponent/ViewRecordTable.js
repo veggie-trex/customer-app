@@ -84,7 +84,7 @@ class Record extends Component {
                                     <td>{data.immunizationType}</td>
                                     <td>{data.immunizationDate}</td>
                                     <td>{data.nextImmunizationDate}</td>
-                                    <td><ShareButton cliked={this.openModal.bind(this, data)}>Share Info</ShareButton></td>
+                                    <td><ShareButton onClick={this.openModal.bind(this, data)}>Share Info</ShareButton></td>
                                 </tr>
                             )
                         })}
