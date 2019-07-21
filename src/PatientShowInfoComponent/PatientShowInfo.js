@@ -10,15 +10,8 @@ const patientShowInfo = () => {
 
     return (
         <Container>
-
             <Viewrecord />
-
-          
-
-
-
             <br />
-
         </Container>
     )
 

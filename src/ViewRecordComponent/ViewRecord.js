@@ -20,7 +20,7 @@ class ViewRecord extends Component {
         console.log(this.state.data);
         return (
         <div>
-            <ViewRecordTable arrayrecords={this.state.data}/>
+            <ViewRecordTable arrayrecords={this.state.data}  />
 
         </div>
         );

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Table } from 'reactstrap';
+import { Table, Button } from 'reactstrap';
 import Modal from 'react-modal';
 import ShareButton from '../../ShareButtonComponent/ShareButton'
 import Patient from '../../PatientComponent/Patient'
-
+import axios from 'axios';
 Modal.setAppElement('#root');
 class Record extends Component {
 
@@ -16,28 +16,39 @@ class Record extends Component {
     }
     state = {
         modalIsOpen: false,
-        data: {}
+        data: {},
     };
 
-    
+
 
     openModal(data) {
-        var obj = {...this.state.data};
-        obj = data; 
+        var obj = { ...this.state.data };
+        obj = data;
         this.setState({ modalIsOpen: true });
-        this.setState({ data: obj});
-        }
+        this.setState({ data: obj });
+    }
 
     afterOpenModal() {
         // references are now sync'd and can be accessed.
         //this.subtitle.style.color = '#f00';
     }
     closeModal() {
-        this.setState({modalIsOpen: false});
-      }
+        this.setState({ modalIsOpen: false });
+    }
 
-    
-   
+
+    shareAllRecordersHandler = () => {
+        console.log("Share all is working");
+
+        axios.post("", this.props.arrayrecords).then((reponse)=>{
+            console.log(reponse);
+        })
+        
+        
+        
+    }
+
+
     render() {
         const customStyles = {
             content: {
@@ -49,42 +60,47 @@ class Record extends Component {
                 transform: 'translate(-50%, -50%)'
             }
         };
+
+
+
         return (
             <div>
-                <Table dark>
-                    <thead>
-                        <tr>
-                            <th scope="row">#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.props.arrayrecords.map((data, index) => {
-                            
-                            return (
+                <br />
+                <Button color="primary" size="lg" onClick={this.shareAllRecordersHandler}>Share All Records</Button>
+                    <Table dark>
+                        <thead>
+                            <tr>
+                                <th scope="row">#</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Username</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.props.arrayrecords.map((data, index) => {
 
-                                <tr key={data.id}>
-                                    <td>{data.id}</td>
-                                    <td>{data.title}</td>
-                                    <td>{data.body}</td>
-                                    <td><ShareButton cliked={this.openModal.bind(this, data) }>Share Info</ShareButton></td>
-                                </tr>
+                                return (
 
-                            )
-                        })}
-                    </tbody>
-                </Table>
-                <Modal
-                    isOpen={this.state.modalIsOpen}
-                    onAfterOpen={this.afterOpenModal}
-                    onRequestClose={this.closeModal}
-                    style={customStyles}>
-                    <Patient clicked={this.closeModal} info={this.state.data} closedModal={this.closeModal} />
-                </Modal>
-            </div>
-        );
-    }
-}
+                                    <tr key={data.id}>
+                                        <td>{data.id}</td>
+                                        <td>{data.title}</td>
+                                        <td>{data.body}</td>
+                                        <td><ShareButton cliked={this.openModal.bind(this, data)}>Share Info</ShareButton></td>
+                                    </tr>
+
+                                )
+                            })}
+                        </tbody>
+                    </Table>
+                    <Modal
+                        isOpen={this.state.modalIsOpen}
+                        onAfterOpen={this.afterOpenModal}
+                        onRequestClose={this.closeModal}
+                        style={customStyles}>
+                        <Patient clicked={this.closeModal} info={this.state.data} closedModal={this.closeModal} />
+                    </Modal>
+                </div>
+                );
+            }
+        }
 export default Record
