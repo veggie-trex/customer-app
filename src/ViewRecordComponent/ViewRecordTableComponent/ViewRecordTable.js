@@ -24,7 +24,8 @@ class Record extends Component {
         modalIsOpen: false,
         data: {},
         recipient: '',
-        recipientInputVisible: false
+        recipientInputVisible: false,
+        displaySuccess: false
     };
 
     openModal(data) {
@@ -46,8 +47,10 @@ class Record extends Component {
         });
         this.setState({
             recipient: '',
-            recipientInputVisible: false
+            recipientInputVisible: false,
+            displaySuccess: true
         });
+        setTimeout(() => this.setState({displaySuccess: false}), 3000)
     }
 
     shareRecord = () => {
@@ -122,6 +125,9 @@ class Record extends Component {
                         </label>
                         <button className="btn btn-primary" onClick={this.shareAllRecords}>Share</button>
                     </div>
+                }
+                {this.state.displaySuccess && 
+                    <h4>Success</h4>
                 }
 
                 <Modal
