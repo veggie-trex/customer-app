@@ -3,7 +3,7 @@ import { Table, Button } from 'reactstrap';
 import Modal from 'react-modal';
 import ShareButton from '../../ShareButtonComponent/ShareButton'
 import Patient from '../../PatientComponent/Patient'
-
+import axios from 'axios';
 Modal.setAppElement('#root');
 class Record extends Component {
 
@@ -16,10 +16,7 @@ class Record extends Component {
     }
     state = {
         modalIsOpen: false,
-
         data: {},
-        shareAllDataArray: [],
-
     };
 
 
@@ -42,8 +39,13 @@ class Record extends Component {
 
     shareAllRecordersHandler = () => {
         console.log("Share all is working");
-        let dataCollection = [...this.props.arrayrecords];
-        this.setState({ shareAllDataArray: dataCollection });
+
+        axios.post("", this.props.arrayrecords).then((reponse)=>{
+            console.log(reponse);
+        })
+        
+        
+        
     }
 
 
