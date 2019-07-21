@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table } from 'reactstrap';
+import { Table, Button} from 'reactstrap';
 import Modal from 'react-modal';
 import ShareButton from '../../ShareButtonComponent/ShareButton'
 import Patient from '../../PatientComponent/Patient'
@@ -15,10 +15,12 @@ class Record extends Component {
     }
     state = {
         modalIsOpen: false,
-        data: {}
+        data: {},
+        shareAllDataArray : [],
+        
     };
 
-    
+     nn  
 
     openModal(data) {
         var obj = {...this.state.data};
@@ -35,7 +37,11 @@ class Record extends Component {
         this.setState({modalIsOpen: false});
       }
 
-    
+    shareAllRecordersHandler = ()=>{
+    //share the entire data with some one
+    let dataCollection = [...this.props.arrayrecords]; 
+    this.setState({shareAllDataArray:dataCollection});     
+    }
    
     render() {
         const customStyles = {
@@ -48,8 +54,12 @@ class Record extends Component {
                 transform: 'translate(-50%, -50%)'
             }
         };
+      
+      
         return (
             <div>
+                <br/>
+                 <Button  color="primary" size="lg" onClick={this.shareAllRecordersHandler}>Share All Records</Button>               
                 <Table dark>
                     <thead>
                         <tr>
