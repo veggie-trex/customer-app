@@ -93,7 +93,7 @@ class Record extends Component {
                             <th>Doctor ID</th>
                             <th>Immunization Type</th>
                             <th>Date</th>
-                            <th>Next Immunization</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
