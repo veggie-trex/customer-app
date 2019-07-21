@@ -14,7 +14,6 @@ class ViewRecord extends Component {
                     r.immunizationDate = new Date(r.immunizationDate).toLocaleDateString();
                     r.nextImmunizationDate = new Date(r.nextImmunizationDate).toLocaleDateString();
                     return r;
-
                 })
                 this.setState({ data: response.data })
             });
