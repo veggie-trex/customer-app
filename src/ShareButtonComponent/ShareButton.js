@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button } from 'reactstrap';
-const sharButton = () =>{
+const sharButton = (props) =>{
+    console.log(props.title);
     return(
-        <Button color="primary">Share Info</Button>
+        <Button onClick={props.cliked} color="info">Share Info</Button>
     )
-    
 }
 
 export default sharButton;

@@ -1,14 +1,26 @@
 import React from 'react'
-import ShareButton from '../ShareButtonComponent/ShareButton'
-import Patient from '../PatientComponent/Patient'
-import Viewrecord from '../ViewRecordComponent/ViewRecord' 
+import Viewrecord from '../ViewRecordComponent/ViewRecord'
+import { Container } from 'reactstrap';
 const patientShowInfo = () => {
 
-    return (<div>
-        <Viewrecord/>
-        <Patient />
-        <ShareButton />
-    </div>)
+    // const [buttonState, setButtonState] = useState({
+    //     modalIsOpen: false
+    // })
+
+
+    return (
+        <Container>
+
+            <Viewrecord />
+
+          
+
+
+
+            <br />
+
+        </Container>
+    )
 
 }
 
