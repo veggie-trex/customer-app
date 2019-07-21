@@ -8,8 +8,9 @@ class ViewRecord extends Component {
     }
 
     componentDidMount() {
-        axios.get(`${process.env.VEGGIE_T_REX_API}/patients/${this.state.patientId}/records`)
+        axios.get(`${process.env.VEGGIE_T_REX_API}patients/${this.state.patientId}/records`)
         .then(response => {
+            console.log(response)
                 this.setState({data: response.data})
             });
     }
