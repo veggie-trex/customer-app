@@ -1,7 +1,8 @@
 import React from 'react';
-import './App.css';
-import { basePaths } from './networking/urls';
 import PatientShowInfo from './PatientShowInfoComponent/PatientShowInfo'
+
+import './App.css';
+
 function App() {
   return (
     <div className="App">

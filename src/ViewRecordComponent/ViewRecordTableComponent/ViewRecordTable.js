@@ -4,7 +4,11 @@ import Modal from 'react-modal';
 import ShareButton from '../../ShareButtonComponent/ShareButton'
 import Patient from '../../PatientComponent/Patient'
 import axios from 'axios';
+
+import "./ViewRecordTable.css";
+
 Modal.setAppElement('#root');
+
 class Record extends Component {
 
     constructor(props) {
@@ -24,8 +28,10 @@ class Record extends Component {
     openModal(data) {
         var obj = { ...this.state.data };
         obj = data;
-        this.setState({ modalIsOpen: true });
-        this.setState({ data: obj });
+        this.setState({ 
+            modalIsOpen: true,
+            data: obj
+         });
     }
 
     afterOpenModal() {
@@ -60,12 +66,11 @@ class Record extends Component {
             }
         };
 
-
-
         return (
             <div>
-                <br />
                 <Button color="primary" size="lg" onClick={this.shareAllRecordersHandler}>Share All Records</Button>
+                <br />
+
                 <Table dark>
                     <thead>
                         <tr>
@@ -77,16 +82,13 @@ class Record extends Component {
                     </thead>
                     <tbody>
                         {this.props.arrayrecords.map((data, index) => {
-
                             return (
-
-                                <tr key={data.id}>
+                                <tr key={index}>
                                     <td>{data.id}</td>
                                     <td>{data.title}</td>
                                     <td>{data.body}</td>
                                     <td><ShareButton cliked={this.openModal.bind(this, data)}>Share Info</ShareButton></td>
                                 </tr>
-
                             )
                         })}
                     </tbody>
